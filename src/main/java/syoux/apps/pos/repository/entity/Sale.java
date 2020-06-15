@@ -27,17 +27,17 @@ public class Sale {
 
   @Getter
   @Setter
-  private String status;
+  private SaleStatus status;
 
-//  @Getter
-//  @Setter
-//  @OneToMany(targetEntity = SaleItem.class, mappedBy = "collage", fetch = FetchType.EAGER)
-//  private List<SaleItem> items;
+  @Getter
+  @Setter
+  @OneToMany(targetEntity = SaleItem.class)
+  private List<SaleItem> items;
 
   public Sale() {
     this.date = new Date();
-//    this.items = new ArrayList<>();
-    this.status = "Created";
+    this.items = new ArrayList<>();
+    this.status = SaleStatus.CREATED;
   }
 
   @Override

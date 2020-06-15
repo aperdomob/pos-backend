@@ -3,6 +3,9 @@ package syoux.apps.pos.repository.entity;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
 public class SaleItem {
@@ -14,4 +17,9 @@ public class SaleItem {
   private int amount;
   private double price;
   private double deduction;
+
+//  @Getter
+//  @Setter
+//  @ManyToOne
+//  private Sale sale;
 }
