@@ -1,4 +1,4 @@
-package syoux.apps.pos.controllers.products;
+package syoux.apps.pos.controllers.endpoints.products;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

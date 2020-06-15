@@ -1,4 +1,4 @@
-package syoux.apps.pos.controllers.sales;
+package syoux.apps.pos.controllers.endpoints.sales;
 
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import syoux.apps.pos.controllers.assembler.SaleModelAssembler;
 import syoux.apps.pos.controllers.exceptions.SaleNotFoundException;
+import syoux.apps.pos.controllers.mapper.SaleMapper;
+import syoux.apps.pos.dto.SaleDto;
 import syoux.apps.pos.repository.entity.Sale;
 import syoux.apps.pos.services.interfaces.ISaleService;
 
@@ -35,12 +37,16 @@ public class SaleController {
   @Autowired
   private SaleModelAssembler assembler;
 
+  @Autowired
+  private SaleMapper saleMapper;
+
   @GetMapping()
-  public CollectionModel<EntityModel<Sale>> all() {
-    List<EntityModel<Sale>> sales = this
+  public CollectionModel<EntityModel<SaleDto>> all() {
+    List<EntityModel<SaleDto>> sales = this
         .saleService
         .getAllSales()
         .stream()
+        .map(saleMapper::entityToDto)
         .map(assembler::toModel)
         .collect(Collectors.toList());
 
@@ -50,17 +56,20 @@ public class SaleController {
   }
 
   @GetMapping("/{id}")
-  public EntityModel<Sale> one(@PathVariable Long id) {
+  public EntityModel<SaleDto> one(@PathVariable Long id) {
     Sale sale = saleService
         .one(id)
         .orElseThrow(() -> new SaleNotFoundException(id));
 
-    return assembler.toModel(sale);
+    SaleDto dto = saleMapper.entityToDto(sale);
+
+    return assembler.toModel(dto);
   }
 
   @PostMapping("create")
   ResponseEntity<?> newSale() {
-    EntityModel<Sale> entityModel = assembler.toModel(saleService.create());
+    SaleDto dto = this.saleMapper.entityToDto(saleService.create());
+    EntityModel<SaleDto> entityModel = assembler.toModel(dto);
 
     return ResponseEntity
         .created(entityModel.getRequiredLink(IanaLinkRelations.SELF).toUri())
