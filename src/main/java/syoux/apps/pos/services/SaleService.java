@@ -1,5 +1,7 @@
 package syoux.apps.pos.services;
 
+import java.util.List;
+import java.util.Optional;
 import org.springframework.stereotype.Service;
 import syoux.apps.pos.repository.SaleRepository;
 import syoux.apps.pos.repository.entity.Sale;
@@ -14,7 +16,17 @@ public class SaleService implements ISaleService {
   }
 
   @Override
-  public void create() {
-    Sale sale = saleRepository.save(new Sale());
+  public Sale create() {
+    return saleRepository.save(new Sale());
+  }
+
+  @Override
+  public List<Sale> getAllSales() {
+    return saleRepository.findAll();
+  }
+
+  @Override
+  public Optional<Sale> one(Long id) {
+    return saleRepository.findById(id);
   }
 }

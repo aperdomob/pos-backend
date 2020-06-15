@@ -5,8 +5,10 @@ import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -27,13 +29,14 @@ public class Sale {
   @Setter
   private String status;
 
-  @Getter
-  @Setter
-  private List<SaleItem> items;
+//  @Getter
+//  @Setter
+//  @OneToMany(targetEntity = SaleItem.class, mappedBy = "collage", fetch = FetchType.EAGER)
+//  private List<SaleItem> items;
 
   public Sale() {
     this.date = new Date();
-    this.items = new ArrayList<>();
+//    this.items = new ArrayList<>();
     this.status = "Created";
   }
 
