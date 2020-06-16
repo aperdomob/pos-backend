@@ -8,16 +8,23 @@ import org.springframework.hateoas.server.RepresentationModelAssembler;
 import org.springframework.stereotype.Component;
 import syoux.apps.pos.controllers.endpoints.sales.SaleController;
 import syoux.apps.pos.dto.SaleDto;
-import syoux.apps.pos.repository.entity.Sale;
+import syoux.apps.pos.repository.entity.SaleStatus;
 
 @Component
 public class SaleModelAssembler implements RepresentationModelAssembler<SaleDto, EntityModel<SaleDto>> {
 
   @Override
   public EntityModel<SaleDto> toModel(SaleDto sale) {
-    return EntityModel.of(
+    EntityModel<SaleDto> saleModel = EntityModel.of(
         sale,
         linkTo(methodOn(SaleController.class).one(sale.getId())).withSelfRel(),
         linkTo(methodOn(SaleController.class).all()).withRel("sales"));
+
+    if (sale.getStatus() == SaleStatus.CREATED) {
+      saleModel.add(linkTo(methodOn(SaleController.class).confirm(sale.getId())).withRel("confirm"));
+      saleModel.add(linkTo(methodOn(SaleController.class).cancel(sale.getId())).withRel("cancel"));
+    }
+
+    return saleModel;
   }
 }

@@ -57,10 +57,7 @@ public class SaleController {
 
   @GetMapping("/{id}")
   public EntityModel<SaleDto> one(@PathVariable Long id) {
-    Sale sale = saleService
-        .one(id)
-        .orElseThrow(() -> new SaleNotFoundException(id));
-
+    Sale sale = saleService.one(id);
     SaleDto dto = saleMapper.entityToDto(sale);
 
     return assembler.toModel(dto);
@@ -74,5 +71,17 @@ public class SaleController {
     return ResponseEntity
         .created(entityModel.getRequiredLink(IanaLinkRelations.SELF).toUri())
         .body(entityModel);
+  }
+
+  @PostMapping("/{id}/confirm")
+  public ResponseEntity<?> confirm(@PathVariable Long id) {
+    Sale sale = this.saleService.one(id);
+    return null;
+
+  }
+
+  @PostMapping("/{id}/cancel")
+  public ResponseEntity<?> cancel(@PathVariable Long id) {
+    return null;
   }
 }
