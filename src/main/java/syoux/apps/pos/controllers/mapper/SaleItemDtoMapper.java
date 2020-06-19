@@ -5,7 +5,7 @@ import syoux.apps.pos.dto.SaleItemDto;
 import syoux.apps.pos.repository.entity.SaleItem;
 
 @Mapper(componentModel = "spring")
-public interface SaleItemMapper {
+public interface SaleItemDtoMapper {
   SaleItemDto entityToDto(SaleItem entity);
   SaleItem dtoToEntity(SaleItemDto dto);
 }

@@ -1,9 +1,11 @@
 package syoux.apps.pos.services;
 
 import java.util.List;
-import java.util.Optional;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import org.springframework.stereotype.Service;
 import syoux.apps.pos.controllers.exceptions.SaleNotFoundException;
+import syoux.apps.pos.repository.SaleItemRepository;
 import syoux.apps.pos.repository.SaleRepository;
 import syoux.apps.pos.repository.entity.Sale;
 import syoux.apps.pos.repository.entity.SaleItem;
@@ -12,9 +14,15 @@ import syoux.apps.pos.services.interfaces.ISaleService;
 @Service
 public class SaleService implements ISaleService {
   private final SaleRepository saleRepository;
+  private final SaleItemRepository saleItemRepository;
 
-  SaleService(SaleRepository saleRepository) {
+  @PersistenceContext // or even @Autowired
+  private EntityManager entityManager;
+
+  SaleService(SaleRepository saleRepository,
+      SaleItemRepository saleItemRepository) {
     this.saleRepository = saleRepository;
+    this.saleItemRepository = saleItemRepository;
   }
 
   @Override
@@ -25,8 +33,14 @@ public class SaleService implements ISaleService {
   @Override
   public void addItem(Long id, SaleItem item) {
     Sale sale = this.one(id);
+    // sale.addItem(item);
 
-    sale.getItems().add(item);
+    this.saleItemRepository.save(item);
+  }
+
+  @Override
+  public List<SaleItem> getAllItems() {
+    return this.saleItemRepository.findAll();
   }
 
   @Override

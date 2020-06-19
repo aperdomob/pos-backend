@@ -1,8 +1,10 @@
 package syoux.apps.pos.repository.entity;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -33,4 +35,9 @@ public class SaleItem {
   @Getter
   @Setter
   private double deduction;
+
+  @Getter
+  @Setter
+  @ManyToOne(targetEntity = Sale.class, fetch = FetchType.LAZY)
+  private Sale sale;
 }

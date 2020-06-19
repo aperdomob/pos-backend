@@ -7,11 +7,11 @@ import syoux.apps.pos.repository.entity.SaleItem;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2020-06-15T19:26:50-0500",
+    date = "2020-06-18T19:58:11-0500",
     comments = "version: 1.3.0.Final, compiler: javac, environment: Java 12.0.1 (Oracle Corporation)"
 )
 @Component
-public class SaleItemMapperImpl implements SaleItemMapper {
+public class SaleItemDtoMapperImpl implements SaleItemDtoMapper {
 
     @Override
     public SaleItemDto entityToDto(SaleItem entity) {

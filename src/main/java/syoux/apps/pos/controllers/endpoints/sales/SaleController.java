@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import syoux.apps.pos.controllers.assembler.SaleModelAssembler;
 import syoux.apps.pos.controllers.exceptions.SaleNotFoundException;
-import syoux.apps.pos.controllers.mapper.SaleMapper;
+import syoux.apps.pos.controllers.mapper.SaleDtoMapper;
 import syoux.apps.pos.dto.SaleDto;
 import syoux.apps.pos.repository.entity.Sale;
 import syoux.apps.pos.services.interfaces.ISaleService;
@@ -38,7 +38,7 @@ public class SaleController {
   private SaleModelAssembler assembler;
 
   @Autowired
-  private SaleMapper saleMapper;
+  private SaleDtoMapper saleDtoMapper;
 
   @GetMapping()
   public CollectionModel<EntityModel<SaleDto>> all() {
@@ -46,7 +46,7 @@ public class SaleController {
         .saleService
         .getAllSales()
         .stream()
-        .map(saleMapper::entityToDto)
+        .map(saleDtoMapper::entityToDto)
         .map(assembler::toModel)
         .collect(Collectors.toList());
 
@@ -58,14 +58,14 @@ public class SaleController {
   @GetMapping("/{id}")
   public EntityModel<SaleDto> one(@PathVariable Long id) {
     Sale sale = saleService.one(id);
-    SaleDto dto = saleMapper.entityToDto(sale);
+    SaleDto dto = saleDtoMapper.entityToDto(sale);
 
     return assembler.toModel(dto);
   }
 
   @PostMapping("create")
   ResponseEntity<?> newSale() {
-    SaleDto dto = this.saleMapper.entityToDto(saleService.create());
+    SaleDto dto = this.saleDtoMapper.entityToDto(saleService.create());
     EntityModel<SaleDto> entityModel = assembler.toModel(dto);
 
     return ResponseEntity

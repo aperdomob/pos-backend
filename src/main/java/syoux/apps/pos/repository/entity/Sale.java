@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -28,14 +29,8 @@ public class Sale {
   @Setter
   private SaleStatus status;
 
-  @Getter
-  @Setter
-  @OneToMany(targetEntity = SaleItem.class)
-  private List<SaleItem> items;
-
   public Sale() {
     this.date = new Date();
-    this.items = new ArrayList<>();
     this.status = SaleStatus.CREATED;
   }
 

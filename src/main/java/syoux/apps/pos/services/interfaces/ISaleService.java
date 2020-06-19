@@ -1,7 +1,6 @@
 package syoux.apps.pos.services.interfaces;
 
 import java.util.List;
-import java.util.Optional;
 import syoux.apps.pos.repository.entity.Sale;
 import syoux.apps.pos.repository.entity.SaleItem;
 
@@ -14,4 +13,5 @@ public interface ISaleService {
   void addItem(Long id, SaleItem item);
 
 
+  List<SaleItem> getAllItems();
 }
