@@ -7,7 +7,7 @@ import syoux.apps.pos.repository.entity.Sale;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2020-06-18T20:01:09-0500",
+    date = "2020-06-20T07:16:02-0500",
     comments = "version: 1.3.0.Final, compiler: javac, environment: Java 12.0.1 (Oracle Corporation)"
 )
 @Component
@@ -23,12 +23,13 @@ public class SaleMapperImpl implements SaleMapper {
 
         saleDomain.setId( entity.getId() );
         saleDomain.setDate( entity.getDate() );
+        saleDomain.setStatus( entity.getStatus() );
 
         return saleDomain;
     }
 
     @Override
-    public Sale entityToDomain(SaleDomain domain) {
+    public Sale domainToEntity(SaleDomain domain) {
         if ( domain == null ) {
             return null;
         }
@@ -37,6 +38,7 @@ public class SaleMapperImpl implements SaleMapper {
 
         sale.setId( domain.getId() );
         sale.setDate( domain.getDate() );
+        sale.setStatus( domain.getStatus() );
 
         return sale;
     }

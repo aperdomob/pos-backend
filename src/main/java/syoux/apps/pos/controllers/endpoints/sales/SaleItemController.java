@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import syoux.apps.pos.controllers.mapper.SaleItemDtoMapper;
+import syoux.apps.pos.domain.SaleItemDomain;
 import syoux.apps.pos.dto.SaleItemDto;
 import syoux.apps.pos.repository.entity.SaleItem;
 import syoux.apps.pos.services.interfaces.ISaleService;
@@ -26,13 +27,13 @@ public class SaleItemController {
 
   @PostMapping("")
   ResponseEntity<?> newItem(@PathVariable Long id, @RequestBody SaleItemDto saleItemDto) {
-    this.saleService.addItem(id, saleItemDtoMapper.dtoToEntity(saleItemDto));
+    this.saleService.addItem(id, saleItemDtoMapper.dtoToDomain(saleItemDto));
 
     return ResponseEntity.status(HttpStatus.CREATED).build();
   }
 
   @GetMapping("")
-  List<SaleItem> all() {
+  List<SaleItemDomain> all() {
     return saleService.getAllItems();
   }
 }

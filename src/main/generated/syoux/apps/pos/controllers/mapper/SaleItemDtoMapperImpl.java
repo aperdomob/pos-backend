@@ -2,19 +2,19 @@ package syoux.apps.pos.controllers.mapper;
 
 import javax.annotation.Generated;
 import org.springframework.stereotype.Component;
+import syoux.apps.pos.domain.SaleItemDomain;
 import syoux.apps.pos.dto.SaleItemDto;
-import syoux.apps.pos.repository.entity.SaleItem;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2020-06-18T19:58:11-0500",
+    date = "2020-06-20T07:13:07-0500",
     comments = "version: 1.3.0.Final, compiler: javac, environment: Java 12.0.1 (Oracle Corporation)"
 )
 @Component
 public class SaleItemDtoMapperImpl implements SaleItemDtoMapper {
 
     @Override
-    public SaleItemDto entityToDto(SaleItem entity) {
+    public SaleItemDto domainToDto(SaleItemDomain entity) {
         if ( entity == null ) {
             return null;
         }
@@ -32,20 +32,20 @@ public class SaleItemDtoMapperImpl implements SaleItemDtoMapper {
     }
 
     @Override
-    public SaleItem dtoToEntity(SaleItemDto dto) {
+    public SaleItemDomain dtoToDomain(SaleItemDto dto) {
         if ( dto == null ) {
             return null;
         }
 
-        SaleItem saleItem = new SaleItem();
+        SaleItemDomain saleItemDomain = new SaleItemDomain();
 
-        saleItem.setId( dto.getId() );
-        saleItem.setName( dto.getName() );
-        saleItem.setReference( dto.getReference() );
-        saleItem.setAmount( dto.getAmount() );
-        saleItem.setPrice( dto.getPrice() );
-        saleItem.setDeduction( dto.getDeduction() );
+        saleItemDomain.setId( dto.getId() );
+        saleItemDomain.setName( dto.getName() );
+        saleItemDomain.setReference( dto.getReference() );
+        saleItemDomain.setAmount( dto.getAmount() );
+        saleItemDomain.setPrice( dto.getPrice() );
+        saleItemDomain.setDeduction( dto.getDeduction() );
 
-        return saleItem;
+        return saleItemDomain;
     }
 }
