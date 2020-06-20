@@ -4,7 +4,7 @@ import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import syoux.apps.pos.domain.SaleItemDomain;
-import syoux.apps.pos.dto.SaleItemDto;
+import syoux.apps.pos.controllers.dto.SaleItemDto;
 
 @Mapper(componentModel = "spring")
 public interface SaleItemDtoMapper {

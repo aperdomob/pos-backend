@@ -1,4 +1,4 @@
-package syoux.apps.pos.dto;
+package syoux.apps.pos.controllers.dto;
 
 import java.util.Date;
 import java.util.List;

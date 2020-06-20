@@ -1,4 +1,4 @@
-package syoux.apps.pos.dto;
+package syoux.apps.pos.controllers.dto;
 
 import lombok.Getter;
 import lombok.Setter;

@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import syoux.apps.pos.controllers.assembler.SaleItemModelAssembler;
 import syoux.apps.pos.controllers.mapper.SaleItemDtoMapper;
 import syoux.apps.pos.domain.SaleItemDomain;
-import syoux.apps.pos.dto.SaleItemDto;
+import syoux.apps.pos.controllers.dto.SaleItemDto;
 import syoux.apps.pos.services.interfaces.ISaleService;
 
 @RestController

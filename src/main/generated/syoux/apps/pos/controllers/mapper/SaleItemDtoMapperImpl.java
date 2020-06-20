@@ -2,12 +2,12 @@ package syoux.apps.pos.controllers.mapper;
 
 import javax.annotation.Generated;
 import org.springframework.stereotype.Component;
+import syoux.apps.pos.controllers.dto.SaleItemDto;
 import syoux.apps.pos.domain.SaleItemDomain;
-import syoux.apps.pos.dto.SaleItemDto;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2020-06-20T11:15:30-0500",
+    date = "2020-06-20T12:25:40-0500",
     comments = "version: 1.3.0.Final, compiler: javac, environment: Java 12.0.1 (Oracle Corporation)"
 )
 @Component
