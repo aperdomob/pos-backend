@@ -1,10 +1,9 @@
 package syoux.apps.pos.services.interfaces;
 
+import java.util.Arrays;
 import java.util.List;
 import syoux.apps.pos.domain.SaleDomain;
 import syoux.apps.pos.domain.SaleItemDomain;
-import syoux.apps.pos.repository.entity.Sale;
-import syoux.apps.pos.repository.entity.SaleItem;
 
 public interface ISaleService {
 
@@ -12,8 +11,12 @@ public interface ISaleService {
   SaleDomain one(Long id);
 
   SaleDomain create();
-  void addItem(Long id, SaleItemDomain item);
+  SaleItemDomain addItem(Long id, SaleItemDomain item);
 
 
   List<SaleItemDomain> getAllItems();
+
+  SaleItemDomain getItem(Long saleId, Long id);
+
+  List<SaleItemDomain> getItems(Long saleId);
 }

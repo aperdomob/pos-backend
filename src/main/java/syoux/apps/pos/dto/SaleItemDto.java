@@ -27,4 +27,8 @@ public class SaleItemDto {
   @Getter
   @Setter
   private double deduction;
+
+  @Getter
+  @Setter
+  private Long saleId;
 }
