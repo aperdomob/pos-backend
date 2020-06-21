@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import syoux.apps.pos.controllers.exceptions.ProductNotFoundException;
 import syoux.apps.pos.domain.ProductDomain;
 import syoux.apps.pos.repository.ProductRepository;
+import syoux.apps.pos.repository.entity.Product;
 import syoux.apps.pos.services.interfaces.IProductService;
 import syoux.apps.pos.services.mapper.ProductMapper;
 
@@ -40,5 +41,14 @@ public class ProductService implements IProductService {
 
     return this.productMapper
         .entityToDomain(this.productRepository.save(productMapper.domainToEntity(product)));
+  }
+
+  @Override
+  public void delete(Long productId) {
+    Product product = this.productRepository.findById(productId).orElse(null);
+
+    if (product != null) {
+      this.productRepository.delete(product);
+    }
   }
 }

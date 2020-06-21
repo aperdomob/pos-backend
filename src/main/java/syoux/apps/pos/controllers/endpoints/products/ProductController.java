@@ -5,13 +5,13 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 import java.util.List;
 import java.util.stream.Collectors;
-import org.hibernate.EntityMode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.IanaLinkRelations;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,7 +21,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import syoux.apps.pos.controllers.assembler.ProductModelAssembler;
 import syoux.apps.pos.controllers.dto.ProductDto;
-import syoux.apps.pos.controllers.dto.SaleDto;
 import syoux.apps.pos.controllers.mapper.ProductDtoMapper;
 import syoux.apps.pos.services.interfaces.IProductService;
 
@@ -80,5 +79,12 @@ public class ProductController {
         .status(HttpStatus.OK)
         .location(model.getRequiredLink(IanaLinkRelations.SELF).toUri())
         .body(model);
+  }
+
+  @DeleteMapping("/{id}")
+  public ResponseEntity<?> delete(@PathVariable Long id) {
+    productService.delete(id);
+
+    return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
   }
 }

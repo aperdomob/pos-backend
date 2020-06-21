@@ -6,6 +6,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -35,7 +36,15 @@ public class PosApplication {
 		return new WebMvcConfigurer() {
 			@Override
 			public void addCorsMappings(CorsRegistry registry) {
-				registry.addMapping("/**").allowedOrigins("http://localhost:4200");
+				registry
+						.addMapping("/**")
+						.allowedMethods(
+								RequestMethod.GET.toString(),
+								RequestMethod.POST.toString(),
+								RequestMethod.PUT.toString(),
+								RequestMethod.DELETE.toString(),
+								RequestMethod.PATCH.toString())
+						.allowedOrigins("http://localhost:4200");
 			}
 		};
 	}

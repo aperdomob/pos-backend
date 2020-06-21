@@ -31,5 +31,9 @@ public class Stocktaking {
 
   @Getter
   @Setter
-  private Double averageCost;
+  private double averageCost;
+
+  @Getter
+  @Setter
+  private double lastCost;
 }

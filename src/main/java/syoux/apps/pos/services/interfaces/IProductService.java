@@ -9,4 +9,6 @@ public interface IProductService {
   List<ProductDomain> all();
 
   ProductDomain update(ProductDomain product);
+
+  void delete(Long productId);
 }
