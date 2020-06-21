@@ -7,9 +7,7 @@ import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.server.RepresentationModelAssembler;
 import org.springframework.stereotype.Component;
 import syoux.apps.pos.controllers.dto.ProductDto;
-import syoux.apps.pos.controllers.dto.SaleDto;
-import syoux.apps.pos.controllers.endpoints.sales.SaleController;
-import syoux.apps.pos.repository.entity.SaleStatus;
+import syoux.apps.pos.controllers.endpoints.products.ProductController;
 
 @Component
 public class ProductModelAssembler implements RepresentationModelAssembler<ProductDto, EntityModel<ProductDto>> {
@@ -18,8 +16,8 @@ public class ProductModelAssembler implements RepresentationModelAssembler<Produ
   public EntityModel<ProductDto> toModel(ProductDto product) {
     EntityModel<ProductDto> productModel = EntityModel.of(
         product,
-        linkTo(methodOn(SaleController.class).one(product.getId())).withSelfRel(),
-        linkTo(methodOn(SaleController.class).all()).withRel("sales"));
+        linkTo(methodOn(ProductController.class).one(product.getId())).withSelfRel(),
+        linkTo(methodOn(ProductController.class).all()).withRel("sales"));
 
     return productModel;
   }

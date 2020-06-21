@@ -7,4 +7,6 @@ public interface IProductService {
   ProductDomain create(ProductDomain product);
 
   List<ProductDomain> all();
+
+  ProductDomain update(ProductDomain product);
 }

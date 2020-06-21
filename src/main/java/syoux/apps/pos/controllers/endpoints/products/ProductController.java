@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.IanaLinkRelations;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -69,7 +70,15 @@ public class ProductController {
   }
 
   @PutMapping("/{id}")
-  public ProductDto update(@PathVariable Long id, @RequestBody ProductDto productDto) {
-    return null;
+  public ResponseEntity<?> update(@PathVariable Long id, @RequestBody ProductDto productDto) {
+    productDto.setId(id);
+
+    ProductDto dto = productDtoMapper.domainToDto(productService.update(productDtoMapper.dtoToDomain(productDto)));
+    EntityModel<ProductDto> model = assembler.toModel(dto);
+
+    return ResponseEntity
+        .status(HttpStatus.OK)
+        .location(model.getRequiredLink(IanaLinkRelations.SELF).toUri())
+        .body(model);
   }
 }

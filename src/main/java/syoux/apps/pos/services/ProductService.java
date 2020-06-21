@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import syoux.apps.pos.controllers.exceptions.ProductNotFoundException;
 import syoux.apps.pos.domain.ProductDomain;
 import syoux.apps.pos.repository.ProductRepository;
 import syoux.apps.pos.services.interfaces.IProductService;
@@ -29,5 +30,15 @@ public class ProductService implements IProductService {
         .stream()
         .map(productMapper::entityToDomain)
         .collect(Collectors.toList());
+  }
+
+  @Override
+  public ProductDomain update(ProductDomain product) {
+    this.productRepository
+        .findById(product.getId())
+        .orElseThrow(() -> new ProductNotFoundException(product.getId()));
+
+    return this.productMapper
+        .entityToDomain(this.productRepository.save(productMapper.domainToEntity(product)));
   }
 }
