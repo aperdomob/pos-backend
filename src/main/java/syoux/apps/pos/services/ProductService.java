@@ -6,10 +6,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import syoux.apps.pos.controllers.exceptions.ProductNotFoundException;
 import syoux.apps.pos.domain.ProductDomain;
+import syoux.apps.pos.domain.StocktakingDomain;
 import syoux.apps.pos.repository.ProductRepository;
+import syoux.apps.pos.repository.StocktakingRepository;
 import syoux.apps.pos.repository.entity.Product;
+import syoux.apps.pos.repository.entity.Stocktaking;
 import syoux.apps.pos.services.interfaces.IProductService;
 import syoux.apps.pos.services.mapper.ProductMapper;
+import syoux.apps.pos.services.mapper.StocktakingMapper;
 
 @Service
 public class ProductService implements IProductService {
@@ -17,11 +21,23 @@ public class ProductService implements IProductService {
   ProductRepository productRepository;
 
   @Autowired
+  StocktakingRepository stocktakingRepository;
+
+  @Autowired
   ProductMapper productMapper;
+
+  @Autowired
+  StocktakingMapper stocktakingMapper;
 
   @Override
   public ProductDomain create(ProductDomain product) {
-    return productMapper.entityToDomain(this.productRepository.save(this.productMapper.domainToEntity(product)));
+    Product productEntity = this.productRepository.save(this.productMapper.domainToEntity(product));
+    StocktakingDomain stocktaking = stocktakingMapper.entityToDomain(this. stocktakingRepository.save(new Stocktaking(productEntity)));
+
+    ProductDomain newProduct = productMapper.entityToDomain(productEntity);
+    newProduct.getStocktaking().add(stocktaking);
+
+    return newProduct;
   }
 
   @Override

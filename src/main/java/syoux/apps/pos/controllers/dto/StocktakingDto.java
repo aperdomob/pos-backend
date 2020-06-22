@@ -7,4 +7,19 @@ public class StocktakingDto {
   @Getter
   @Setter
   private Long id;
+
+  @Getter
+  @Setter
+  private Long available;
+
+  @Getter
+  @Setter
+  private double lastCost;
+
+  @Getter
+  @Setter
+  private double averageCost;
+
+  @Getter
+  @Setter Long productId;
 }

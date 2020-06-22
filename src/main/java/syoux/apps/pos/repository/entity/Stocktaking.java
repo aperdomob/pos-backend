@@ -23,10 +23,6 @@ public class Stocktaking {
 
   @Getter
   @Setter
-  private String packaging;
-
-  @Getter
-  @Setter
   private Long available;
 
   @Getter
@@ -36,4 +32,15 @@ public class Stocktaking {
   @Getter
   @Setter
   private double lastCost;
+
+  public Stocktaking(Product product) {
+    this.product = product;
+    this.available = 0L;
+    this.averageCost = 0;
+    this.lastCost = 0;
+  }
+
+  public Stocktaking() {
+    this(null);
+  }
 }

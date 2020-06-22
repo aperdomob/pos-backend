@@ -4,7 +4,7 @@ import java.util.List;
 import syoux.apps.pos.domain.StocktakingDomain;
 
 public interface IStocktakingService {
-  List<StocktakingDomain> all();
+  List<StocktakingDomain> allByProduct(Long productId);
 
   StocktakingDomain create(StocktakingDomain stocktaking);
 

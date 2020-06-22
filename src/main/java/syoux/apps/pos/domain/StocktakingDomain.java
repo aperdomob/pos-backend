@@ -18,5 +18,5 @@ public class StocktakingDomain {
 
   @Getter
   @Setter
-  private String packaging;
+  private double averageCost;
 }

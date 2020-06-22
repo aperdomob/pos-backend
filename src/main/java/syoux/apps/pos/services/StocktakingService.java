@@ -3,6 +3,7 @@ package syoux.apps.pos.services;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import syoux.apps.pos.controllers.exceptions.StocktakingNotFoundException;
 import syoux.apps.pos.domain.StocktakingDomain;
 import syoux.apps.pos.repository.StocktakingRepository;
@@ -10,6 +11,7 @@ import syoux.apps.pos.repository.entity.Stocktaking;
 import syoux.apps.pos.services.interfaces.IStocktakingService;
 import syoux.apps.pos.services.mapper.StocktakingMapper;
 
+@Service
 public class StocktakingService implements IStocktakingService {
 
   @Autowired
@@ -19,7 +21,7 @@ public class StocktakingService implements IStocktakingService {
   private StocktakingMapper mapper;
 
   @Override
-  public List<StocktakingDomain> all() {
+  public List<StocktakingDomain> allByProduct(Long productId) {
     return stocktakingRepository
         .findAll()
         .stream()
@@ -44,7 +46,6 @@ public class StocktakingService implements IStocktakingService {
 
     entity.setAvailable(stocktaking.getAvailable());
     entity.setLastCost(stocktaking.getLastCost());
-    entity.setPackaging(stocktaking.getPackaging());
 
     return mapper.entityToDomain(stocktakingRepository.save(entity));
   }

@@ -43,7 +43,12 @@ public class ProductController {
         .all()
         .stream()
         .map(product -> {
-          return this.assembler.toModel(this.productDtoMapper.domainToDto(product));
+          ProductDto dto = this.productDtoMapper.map(product);
+          dto.getStocktaking().forEach(stocktaking -> {
+            stocktaking.setProductId(product.getId());
+          });
+
+          return this.assembler.toModel(dto);
         })
         .collect(Collectors.toList());
 
@@ -55,7 +60,7 @@ public class ProductController {
 
   @PostMapping("")
   public ResponseEntity<?> create(@RequestBody ProductDto productDto) {
-    ProductDto dto = productDtoMapper.domainToDto(productService.create(productDtoMapper.dtoToDomain(productDto)));
+    ProductDto dto = productDtoMapper.map(productService.create(productDtoMapper.map(productDto)));
     EntityModel<ProductDto> model = assembler.toModel(dto);
 
     return ResponseEntity
@@ -72,7 +77,7 @@ public class ProductController {
   public ResponseEntity<?> update(@PathVariable Long id, @RequestBody ProductDto productDto) {
     productDto.setId(id);
 
-    ProductDto dto = productDtoMapper.domainToDto(productService.update(productDtoMapper.dtoToDomain(productDto)));
+    ProductDto dto = productDtoMapper.map(productService.update(productDtoMapper.map(productDto)));
     EntityModel<ProductDto> model = assembler.toModel(dto);
 
     return ResponseEntity

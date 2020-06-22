@@ -1,11 +1,10 @@
-package syoux.apps.pos.controllers.endpoints.stocktaking;
+package syoux.apps.pos.controllers.endpoints.products;
 
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 import java.util.List;
 import java.util.stream.Collectors;
-import org.hibernate.boot.jaxb.hbm.internal.EntityModeConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
@@ -27,7 +26,7 @@ import syoux.apps.pos.domain.StocktakingDomain;
 import syoux.apps.pos.services.interfaces.IStocktakingService;
 
 @RestController()
-@RequestMapping("stocktaking")
+@RequestMapping("products/{productId}/stocktaking")
 public class StocktakingController {
   @Autowired
   private IStocktakingService stocktakingService;
@@ -39,9 +38,9 @@ public class StocktakingController {
   private StocktakingDtoMapper stocktakingDtoMapper;
 
   @GetMapping("")
-  public CollectionModel<EntityModel<StocktakingDto>> all() {
+  public CollectionModel<EntityModel<StocktakingDto>> all(@PathVariable Long productId) {
     List<EntityModel<StocktakingDto>> items = this.stocktakingService
-        .all()
+        .allByProduct(productId)
         .stream()
         .map(item -> {
           return this.assembler.toModel(this.stocktakingDtoMapper.domainToDto(item));
@@ -49,7 +48,7 @@ public class StocktakingController {
         .collect(Collectors.toList());
 
     return CollectionModel.of(items,
-        linkTo(methodOn(StocktakingController.class).all()).withSelfRel());
+        linkTo(methodOn(StocktakingController.class).all(productId)).withSelfRel());
   }
 
   @PostMapping("")

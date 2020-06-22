@@ -24,10 +24,6 @@ public class SearchProductDomain {
 
   @Getter
   @Setter
-  private String packaging;
-
-  @Getter
-  @Setter
   private Long available;
 
   @Getter
@@ -36,7 +32,6 @@ public class SearchProductDomain {
 
   public SearchProductDomain() {
     this.cost = 0D;
-    this.packaging = "";
     this.available = 0L;
   }
 
@@ -51,7 +46,6 @@ public class SearchProductDomain {
     instance.reference = product.getName();
     instance.reference = product.getName();
     instance.price = product.getPrice();
-    instance.packaging = stocktaking.getPackaging();
     instance.available = stocktaking.getAvailable();
     instance.cost = stocktaking.getAverageCost();
 
