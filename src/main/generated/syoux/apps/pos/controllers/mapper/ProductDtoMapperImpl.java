@@ -2,7 +2,7 @@ package syoux.apps.pos.controllers.mapper;
 
 import java.util.ArrayList;
 import java.util.List;
-import javax.annotation.Generated;
+import javax.annotation.processing.Generated;
 import org.springframework.stereotype.Component;
 import syoux.apps.pos.controllers.dto.ProductDto;
 import syoux.apps.pos.controllers.dto.StocktakingDto;
@@ -11,7 +11,7 @@ import syoux.apps.pos.domain.StocktakingDomain;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2020-06-22T12:20:49-0500",
+    date = "2020-06-22T13:37:20-0500",
     comments = "version: 1.3.0.Final, compiler: javac, environment: Java 12.0.1 (Oracle Corporation)"
 )
 @Component

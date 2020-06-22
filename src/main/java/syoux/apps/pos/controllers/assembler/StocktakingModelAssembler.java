@@ -17,7 +17,7 @@ public class StocktakingModelAssembler implements RepresentationModelAssembler<S
   public EntityModel<StocktakingDto> toModel(StocktakingDto stocktaking) {
     EntityModel<StocktakingDto> productModel = EntityModel.of(
         stocktaking,
-        linkTo(methodOn(StocktakingController.class).one(stocktaking.getId())).withSelfRel(),
+        linkTo(methodOn(StocktakingController.class).one(stocktaking.getProductId(), stocktaking.getId())).withSelfRel(),
         linkTo(methodOn(StocktakingController.class).all(stocktaking.getProductId())).withRel("stocktaking"),
         linkTo(methodOn(ProductController.class).one(stocktaking.getProductId())).withRel("product")
       );

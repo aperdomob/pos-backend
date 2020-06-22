@@ -63,7 +63,7 @@ public class StocktakingController {
   }
 
   @GetMapping("/{id}")
-  public EntityModel<StocktakingDto> one(@PathVariable Long id) {
+  public EntityModel<StocktakingDto> one(@PathVariable Long productId, @PathVariable Long id) {
     StocktakingDomain stocktaking = stocktakingService.one(id);
     StocktakingDto dto = stocktakingDtoMapper.domainToDto(stocktaking);
 

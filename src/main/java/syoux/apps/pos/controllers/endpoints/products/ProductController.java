@@ -42,14 +42,7 @@ public class ProductController {
     List<EntityModel<ProductDto>> products = this.productService
         .all()
         .stream()
-        .map(product -> {
-          ProductDto dto = this.productDtoMapper.map(product);
-          dto.getStocktaking().forEach(stocktaking -> {
-            stocktaking.setProductId(product.getId());
-          });
-
-          return this.assembler.toModel(dto);
-        })
+        .map(product -> this.assembler.toModel(productDtoMapper.map(product)))
         .collect(Collectors.toList());
 
     return CollectionModel.of(
