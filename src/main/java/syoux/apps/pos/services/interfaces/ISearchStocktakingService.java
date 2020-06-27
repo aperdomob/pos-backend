@@ -7,5 +7,5 @@ public interface ISearchStocktakingService {
 
   List<SearchStocktakingDomain> all();
 
-  List<SearchStocktakingDomain> seach(String query);
+  List<SearchStocktakingDomain> search(String query);
 }

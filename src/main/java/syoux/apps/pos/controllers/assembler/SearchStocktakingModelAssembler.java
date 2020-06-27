@@ -22,4 +22,5 @@ public class SearchStocktakingModelAssembler implements RepresentationModelAssem
 
     return model;
   }
+
 }

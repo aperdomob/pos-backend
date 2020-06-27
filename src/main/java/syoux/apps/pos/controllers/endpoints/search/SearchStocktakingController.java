@@ -1,5 +1,8 @@
 package syoux.apps.pos.controllers.endpoints.search;
 
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
+
 import java.util.List;
 import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,21 +30,24 @@ public class SearchStocktakingController {
   @Autowired
   private SearchStocktakingDtoMapper mapper;
 
-  @GetMapping
-  public CollectionModel<EntityModel<SearchStocktakingDto>> find(@RequestParam String q) {
+  @GetMapping("")
+  public CollectionModel<EntityModel<SearchStocktakingDto>> find(@RequestParam(defaultValue = "") String q) {
     List<EntityModel<SearchStocktakingDto>> results = search(q)
         .stream()
         .map(result -> this.assembler.toModel(mapper.map(result)))
         .collect(Collectors.toList());;
 
-    return null;
+    return CollectionModel.of(
+        results,
+        linkTo(methodOn(SearchStocktakingController.class).find(q)).withSelfRel()
+    );
   }
 
   private List<SearchStocktakingDomain> search(String query) {
-    if (query.isBlank()) {
+    if (query == null || query.isBlank()) {
       return this.searchStocktakingService.all();
     }
 
-    return this.searchStocktakingService.seach(query);
+    return this.searchStocktakingService.search(query);
   }
 }
