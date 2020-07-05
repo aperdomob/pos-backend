@@ -6,21 +6,21 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.server.RepresentationModelAssembler;
 import org.springframework.stereotype.Component;
-import syoux.apps.pos.controllers.dto.SearchStocktakingDto;
+import syoux.apps.pos.controllers.dto.SearchProductDto;
 import syoux.apps.pos.controllers.endpoints.products.ProductController;
 import syoux.apps.pos.controllers.endpoints.products.ProductStocktakingController;
 
 @Component
-public class SearchStocktakingModelAssembler implements RepresentationModelAssembler<SearchStocktakingDto, EntityModel<SearchStocktakingDto>> {
+public class SearchProductModelAssembler implements
+    RepresentationModelAssembler<SearchProductDto, EntityModel<SearchProductDto>> {
 
   @Override
-  public EntityModel<SearchStocktakingDto> toModel(SearchStocktakingDto dto) {
-    EntityModel<SearchStocktakingDto> model = EntityModel.of(
+  public EntityModel<SearchProductDto> toModel(SearchProductDto dto) {
+    EntityModel<SearchProductDto> model = EntityModel.of(
         dto,
-        linkTo(methodOn(ProductStocktakingController.class).one(dto.getProductId(), dto.getStocktakingId())).withRel("stocktaking"),
-        linkTo(methodOn(ProductController.class).one(dto.getProductId())).withRel("product"));
+        linkTo(methodOn(ProductController.class).one(dto.getProductId())).withRel("product")
+    );
 
     return model;
   }
-
 }

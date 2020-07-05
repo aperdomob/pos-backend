@@ -27,7 +27,7 @@ import syoux.apps.pos.services.interfaces.IStocktakingService;
 
 @RestController()
 @RequestMapping("products/{productId}/stocktaking")
-public class StocktakingController {
+public class ProductStocktakingController {
   @Autowired
   private IStocktakingService stocktakingService;
 
@@ -48,7 +48,7 @@ public class StocktakingController {
         .collect(Collectors.toList());
 
     return CollectionModel.of(items,
-        linkTo(methodOn(StocktakingController.class).all(productId)).withSelfRel());
+        linkTo(methodOn(ProductStocktakingController.class).all(productId)).withSelfRel());
   }
 
   @PostMapping("")

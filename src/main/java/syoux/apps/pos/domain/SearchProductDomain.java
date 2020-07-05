@@ -12,6 +12,10 @@ public class SearchProductDomain {
 
   @Getter
   @Setter
+  private Long stocktakingId;
+
+  @Getter
+  @Setter
   private String name;
 
   @Getter
@@ -42,9 +46,9 @@ public class SearchProductDomain {
 
     SearchProductDomain instance = new SearchProductDomain();
     instance.productId = product.getId();
+    instance.setStocktakingId(stocktaking.getId());
     instance.name = product.getName();
-    instance.reference = product.getName();
-    instance.reference = product.getName();
+    instance.reference = product.getReference();
     instance.price = product.getPrice();
     instance.available = stocktaking.getAvailable();
     instance.cost = stocktaking.getAverageCost();

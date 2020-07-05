@@ -35,7 +35,7 @@ public class SearchStocktakingController {
     List<EntityModel<SearchStocktakingDto>> results = search(q)
         .stream()
         .map(result -> this.assembler.toModel(mapper.map(result)))
-        .collect(Collectors.toList());;
+        .collect(Collectors.toList());
 
     return CollectionModel.of(
         results,

@@ -11,4 +11,6 @@ public interface IProductService {
   ProductDomain update(ProductDomain product);
 
   void delete(Long productId);
+
+  void createOrUpdate(List<ProductDomain> products);
 }

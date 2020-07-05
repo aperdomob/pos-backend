@@ -4,21 +4,30 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import syoux.apps.pos.domain.SearchProductDomain;
 import syoux.apps.pos.repository.ProductRepository;
 import syoux.apps.pos.repository.StocktakingRepository;
 import syoux.apps.pos.repository.entity.Product;
+import syoux.apps.pos.services.interfaces.ISearchProductService;
 
-public class SearchProductService {
+@Service
+public class SearchProductService implements ISearchProductService {
   @Autowired
   private ProductRepository productRepository;
 
   @Autowired
   private StocktakingRepository stocktakingRepository;
 
-  public List<SearchProductDomain> find(String query) {
+  @Override
+  public List<SearchProductDomain> all() {
+    return null;
+  }
+
+  @Override
+  public List<SearchProductDomain> search(String query) {
     List<Product> products = productRepository
-        .findByNameAndReferenceAllIgnoreCase(query, query);
+        .findByNameContainingOrReferenceContainingAllIgnoreCase(query, query);
 
     List<SearchProductDomain> searchResults = new ArrayList<>();
 

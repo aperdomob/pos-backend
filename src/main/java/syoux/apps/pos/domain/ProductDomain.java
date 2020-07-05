@@ -20,7 +20,7 @@ public class ProductDomain {
 
   @Getter
   @Setter
-  private String price;
+  private Double price;
 
   @Getter
   @Setter
