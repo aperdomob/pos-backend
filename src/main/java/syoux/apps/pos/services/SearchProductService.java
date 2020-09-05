@@ -21,7 +21,9 @@ public class SearchProductService implements ISearchProductService {
 
   @Override
   public List<SearchProductDomain> all() {
-    return null;
+    List<Product> products = productRepository.findAll();
+
+    return transformToProductDomain(products);
   }
 
   @Override
@@ -29,6 +31,10 @@ public class SearchProductService implements ISearchProductService {
     List<Product> products = productRepository
         .findByNameContainingOrReferenceContainingAllIgnoreCase(query, query);
 
+    return transformToProductDomain(products);
+  }
+
+  private List<SearchProductDomain> transformToProductDomain(List<Product> products) {
     List<SearchProductDomain> searchResults = new ArrayList<>();
 
     for (Product product: products) {
